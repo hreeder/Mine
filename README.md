@@ -1,10 +1,10 @@
 Mine
 ===
-
-[![Join the chat at https://gitter.im/hreeder/Mine](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hreeder/Mine?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 A project for powering your website needs.
 
 Mine, as in "This website is *mine*"
+
+[![Join the chat at https://gitter.im/hreeder/Mine](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hreeder/Mine?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ### Aims
 Mine aims to be a central platform for serving personal websites. It is not intended to become a hosting platform.
