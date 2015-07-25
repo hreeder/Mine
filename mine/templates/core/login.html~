@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Log In{% endblock %}
+{% block pagetitle %}LOG IN{% endblock %}
+
+
+{% block main %}
+<form class="form-horizontal" method="POST">
+  {{ form.hidden_tag() }}
+  <div class="form-group">
+    {{ form.url.label(class="control-label col-sm-2") }}
+    <div class="col-sm-10">
+      {{ form.url(class="form-control") }}
+    </div>
+  </div><br />
+  <div class="form-group">
+    <input type="submit" class="btn btn-primary btn-block" value="Log In">
+  </div>
+</form>
+{% endblock %}

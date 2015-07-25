@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-from flask.ext.assets import ManageAssets
 from flask.ext.migrate import MigrateCommand
 from flask.ext.script import Manager
 
