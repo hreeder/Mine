@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Entry{% endblock  %}
+{% block pagetitle %}{% if entry.name %}{{ entry.name }}{% else %}{{ site.title|upper }}{% endif %}{% endblock %}
+
+{% block main %}
+<article class="h-entry">
+  <div class="e-content">
+    {{ entry.content|markdown|safe }}
+  </div>
+  <br /><br />
+  <div class="entry-meta">
+    <span class="pull-right"><small>Created: {{ entry.created_at  }}</small></span>
+  </div>
+</article>
+{% endblock %}

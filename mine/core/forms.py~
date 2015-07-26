@@ -1,6 +1,0 @@
-from flask_wtf import Form
-from wtforms.fields.html5 import URLField
-
-
-class WebSignInForm(Form):
-    url = URLField('Your Domain')

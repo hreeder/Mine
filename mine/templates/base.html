@@ -46,16 +46,19 @@
           <div class="pull-right">
             <img src="http://www.gravatar.com/avatar/882fea3f994a649328155e5ab2316b7f?s=200" alt="Harry Reeder">
             <h4>About Me</h4>
-	    <p>I'm a software engineer, currently working for IBM UK, for my placement year, while studying Software Engineering at <a href="http://www.napier.ac.uk">Edinburgh Napier University</a>.</p>
-	    <p>With IBM, I currently work with the <a href="http://crystal-artemis.eu/">CRYSTAL Project</a>, and do a lot of work with <a href="http://open-services.net/">OSLC</a>.</p>
-	    <p>I love to code, and especially so in Python, at the moment. I've also had varying experience in PHP, .NET, C++, Ruby and Java. Some of these have been primarily through my university course, some of these have been projects which I have used to learn the language in my own time.</p>
-	    <p>
+            <p>I'm a software engineer, currently working for IBM UK, for my placement year, while studying Software Engineering at <a href="http://www.napier.ac.uk">Edinburgh Napier University</a>.</p>
+            <p>With IBM, I currently work with the <a href="http://crystal-artemis.eu/">CRYSTAL Project</a>, and do a lot of work with <a href="http://open-services.net/">OSLC</a>.</p>
+            <p>I love to code, and especially so in Python, at the moment. I've also had varying experience in PHP, .NET, C++, Ruby and Java. Some of these have been primarily through my university course, some of these have been projects which I have used to learn the language in my own time.</p>
+            <p>
               <a href="https://github.com/hreeder" rel="me"><i class="fa fa-4x fa-github-square"></i></a>
               <a href="https://bitbucket.org/hreeder" rel="me"><i class="fa fa-4x fa-bitbucket-square"></i></a>
-	      <a href="https://twitter.com/harry_reeder" rel="me"><i class="fa fa-4x fa-twitter-square"></i></a>
-	      <a href="https://uk.linkedin.com/in/hreeder" rel="me"><i class="fa fa-4x fa-linkedin-square"></i></a>
-	      <a href="http://last.fm/user/thebigredbutton" rel="me"><i class="fa fa-4x fa-lastfm-square"></i></a>
-	    </p>
+              <a href="https://plus.google.com/+HarryReeder-tbrb" rel="me"><i class="fa fa-4x fa-google-plus-square"></i></a>
+              <a href="https://twitter.com/harry_reeder" rel="me"><i class="fa fa-4x fa-twitter-square"></i></a>
+            </p>
+            <p>
+              <a href="https://uk.linkedin.com/in/hreeder" rel="me"><i class="fa fa-4x fa-linkedin-square"></i></a>
+              <a href="http://last.fm/user/thebigredbutton" rel="me"><i class="fa fa-4x fa-lastfm-square"></i></a>
+              <a href="mailto:harry@harryreeder.co.uk" rel="me"><i class="fa fa-4x fa-envelope-square"></i></a>
           </div>
         </div>
       </div>
@@ -63,7 +66,7 @@
       <footer>
               <span><small>&copy;Harry Reeder 2014-2015</small></span>
 	      <span class="pull-right">
-                {% if current_user.is_anonymous() %}   
+                {% if current_user.is_anonymous() %}
                   <a href="{{ url_for('core.login') }}">Log In</a>
                 {% else %}
 		  Logged in as {{ current_user.domain }} {% if current_user.superuser %}&middot; <a href="{{ url_for('admin.index') }}">Admin</a> {% endif %}&middot; <a href="{{ url_for('core.logout') }}">Logout</a>
