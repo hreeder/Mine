@@ -18,10 +18,10 @@
   <body>
     <div class="container">
       <div id="head" class="row">
-        <div class="col-md-4">
+        <div class="col-md-8">
           <span class="title">{% block pagetitle %}{% endblock %}</span>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-4">
           <nav class="navbar">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
@@ -30,7 +30,7 @@
             </div>
             <div class="navbar-collapse collapse navbar-responsive-collapse">
               <ul class="nav nav-pills navbar-nav navbar-right">
-                <li class="active"><a href="/">HOME</a></li>
+                <li{% if request.path == "/" %} class="active"{% endif %}><a href="/">HOME</a></li>
               </ul>
             </div>
           </nav>
