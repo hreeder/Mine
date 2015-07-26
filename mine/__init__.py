@@ -1,5 +1,6 @@
 from flask import Flask
 from flask.ext.login import LoginManager
+from flask.ext.markdown import Markdown
 from flask.ext.migrate import Migrate
 from flask.ext.sqlalchemy import SQLAlchemy
 
@@ -9,6 +10,7 @@ app.config.from_object('config')
 # Load Extensions
 db = SQLAlchemy(app)
 lm = LoginManager(app)
+md = Markdown(app)
 migrate = Migrate(app, db)
 
 # Load Blueprintsf
