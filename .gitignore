@@ -58,3 +58,4 @@ target/
 
 # App specific
 config.py
+.env/
