@@ -3,6 +3,9 @@ from flask.ext.login import LoginManager
 from flask.ext.markdown import Markdown
 from flask.ext.migrate import Migrate
 from flask.ext.sqlalchemy import SQLAlchemy
+from sqlalchemy import exc, event
+from sqlalchemy.pool import Pool
+
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -29,3 +32,13 @@ def inject_site_variable():
     return dict(site={
             "title": "Harry Reeder"
         })
+
+# Fix for "MySQL server has gone away"
+@event.listens_for(Pool, "checkout")
+def ping_connection(dbapi_con, con_record, con_proxy):
+    cur = dbapi_con.cursor()
+    try:
+        cur.execute("SELECT 1")
+    except:
+        raise exc.DisconnectionError()
+    cur.close()
