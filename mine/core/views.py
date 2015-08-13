@@ -90,6 +90,7 @@ def micropub_endpoint():
 
         entry = Entry()
 
+        slug = None
         if "slug" in request.form:
             slug = request.form['slug']
         elif "name" in request.form:
