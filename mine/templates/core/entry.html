@@ -9,7 +9,7 @@
   </div>
   <br /><br />
   <div class="entry-meta">
-    <span class="pull-right"><small>Created: {{ entry.created_at  }}</small></span>
+    <span class="pull-right"><small><a href="{{ url_for('core.get_entry', year=entry.created_at.year, month=entry.created_at.month, id=entry.id) }}" class="u-url">Created: <time class="dt-published" datetime="{{ entry.created_at.isoformat() }}">{{ entry.created_at  }}</time></a></small></span>
   </div>
 </article>
 <br />
