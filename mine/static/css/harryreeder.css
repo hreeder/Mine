@@ -19,6 +19,7 @@ body {
     padding: 10px;
     border-radius: 10px;
     margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 #head {
@@ -49,4 +50,25 @@ body {
 .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
     color: #fff;
     background-color: #3A3A3A;
+}
+
+.h-entry.well {
+    border: none;
+}
+
+.h-entry.well > h2.p-name {
+    margin-top: 0;
+}
+
+.fontawesome-bg-note {
+    position: relative;
+}
+.fontawesome-bg-note:before {
+    position: absolute;
+    font-family: FontAwesome;
+    font-size: 24px;
+    color: rgb(225,225,225);
+    top: -12px;
+    right: -12px;;
+    content: "\f0f6"
 }

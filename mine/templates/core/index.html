@@ -4,16 +4,15 @@
 
 {% block main %}
   {% for entry in entries %}
-    <article class="h-entry">
+    <article class="h-entry well">
+      <div class="fontawesome-bg-note"></div>
       {% if entry.name %}<h2 class="p-name">{{ entry.name }}</h2>{% endif %}
         <div class="e-content">
           {{ entry.content|markdown|safe }}
         </div>
-        <br />
         <div class="entry-meta">
           <span class="pull-right"><small><a href="{{ entry.url }}">Created: {{ entry.created_at }}</a></small></span>
         </div>
     </article>
-    <br /><br /><br />
   {% endfor %}
 {% endblock %}
