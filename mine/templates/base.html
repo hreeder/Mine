@@ -14,6 +14,8 @@
     <link rel="authorization_endpoint" href="https://indieauth.com/auth">
     <link rel="token_endpoint" href="https://tokens.indieauth.com/token">
     <link rel="micropub" href="{{ url_for('core.micropub_endpoint', _external=True) }}">
+
+    <link rel="meta" type="text/turtle" title="FOAF" href="{{ url_for('core.foaf', _external=True) }}">
   </head>
   <body>
     <div class="container">

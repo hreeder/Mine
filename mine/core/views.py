@@ -3,6 +3,8 @@ import urlparse
 
 from flask import render_template, url_for, request, redirect, abort, make_response
 from flask.ext.login import login_user, logout_user, current_user
+from rdflib import Graph, URIRef, Literal
+from rdflib.namespace import RDF, FOAF
 from sqlalchemy import extract, desc
 
 from mine import db
@@ -60,6 +62,31 @@ def login_callback():
 @core.route("/logout")
 def logout():
     logout_user()
+    return redirect(url_for('core.index'))
+
+@core.route("/foaf")
+def foaf():
+    accepts = request.headers['Accept']
+    g = Graph()
+    g.namespace_manager.bind("foaf", FOAF)
+    me = URIRef(url_for('core.foaf', _external=True))
+    g.add((me, RDF.type, FOAF.Person))
+    g.add((me, FOAF.name, Literal("Harry Reeder")))
+    g.add((me, FOAF.homepage, URIRef("http://harryreeder.co.uk")))
+    g.add((me, FOAF.img, URIRef("http://www.gravatar.com/avatar/882fea3f994a649328155e5ab2316b7f?s=200")))
+    g.add((me, FOAF.mbox, URIRef("mailto:harry@harryreeder.co.uk")))
+    if "text/turtle" in accepts:
+        r = make_response(g.serialize(format='turtle'))
+        r.content_type = "text/turtle"
+        return r
+#         return """@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+#
+# <http://harryreeder.co.uk/foaf>
+#     a foaf:Person ;
+#     foaf:name "Harry Reeder" ;
+#     foaf:homepage <http://harryreeder.co.uk/> ;
+#     foaf:img <http://www.gravatar.com/avatar/882fea3f994a649328155e5ab2316b7f?s=200> ;
+#     foaf:mbox <mailto:harry@harryreeder.co.uk> ."""
     return redirect(url_for('core.index'))
 
 
