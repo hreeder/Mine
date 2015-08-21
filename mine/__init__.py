@@ -13,10 +13,10 @@ app.config.from_object('config')
 # Load Extensions
 db = SQLAlchemy(app)
 lm = LoginManager(app)
-md = Markdown(app)
+md = Markdown(app, extensions=['markdown.extensions.fenced_code'])
 migrate = Migrate(app, db)
 
-# Load Blueprintsf
+# Load Blueprints
 from mine.admin import admin
 from mine.core import core
 
