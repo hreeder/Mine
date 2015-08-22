@@ -3,7 +3,7 @@
 {% block pagetitle %}HARRY REEDER {{ super() }}{% endblock %}
 
 {% block main %}
-  {% for entry in entries %}
+  {% for entry in page.items %}
     <article class="h-entry well">
       <div class="fontawesome-bg-note"></div>
       {% if entry.name %}<h2 class="p-name">{{ entry.name }}</h2>{% endif %}
@@ -15,4 +15,10 @@
         </div>
     </article>
   {% endfor %}
+  <nav>
+    <ul class="pager">
+      <li class="previous{% if not page.has_next %} disabled{% endif %}"><a href="{{ url_for('core.index', pagenumber=pagenumber+1) }}"><span aria-hidden="true">&larr;</span> Older</a></li>
+      <li class="next{% if not page.has_prev %} disabled{% endif %}"><a href="{{ url_for('core.index', pagenumber=pagenumber-1) }}">Newer <span aria-hidden="true">&rarr;</span></a></li>
+    </ul>
+  </nav>
 {% endblock %}

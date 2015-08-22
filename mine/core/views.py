@@ -14,9 +14,10 @@ from mine.core.models import User, Entry
 
 
 @core.route("/")
-def index():
-    entries = Entry.query.order_by(desc(Entry.created_at)).limit(10).all()
-    return render_template("core/index.html", entries=entries)
+@core.route("/page/<int:pagenumber>")
+def index(pagenumber=1):
+    page = Entry.query.order_by(desc(Entry.created_at)).paginate(pagenumber,per_page=10)
+    return render_template("core/index.html", page=page, pagenumber=pagenumber)
 
 
 @core.route("/login", methods=['GET', 'POST'])
