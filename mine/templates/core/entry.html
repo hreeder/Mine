@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Entry{% endblock  %}
-{% block pagetitle %}{% if entry.name %}{{ entry.name }}{% else %}{{ site.title|upper }}{{ super() }}{% endif %}{% endblock %}
+{% block pagetitle %}{% if entry.name %}{{ entry.name }}{% else %}{{ site.title|upper }} {{ super() }}{% endif %}{% endblock %}
 
 {% block main %}
 <article class="h-entry">
