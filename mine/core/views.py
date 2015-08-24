@@ -70,7 +70,7 @@ def foaf():
     accepts = request.headers['Accept']
     g = Graph()
     g.namespace_manager.bind("foaf", FOAF)
-    me = URIRef(url_for('core.foaf', _external=True))
+    me = URIRef(url_for('core.foaf', _external=True) + "#me")
     g.add((me, RDF.type, FOAF.Person))
     g.add((me, FOAF.name, Literal("Harry Reeder")))
     g.add((me, FOAF.homepage, URIRef("http://harryreeder.co.uk")))
