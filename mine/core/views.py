@@ -4,11 +4,11 @@ import urlparse
 from flask import render_template, url_for, request, redirect, abort, make_response
 from flask.ext.login import login_user, logout_user, current_user
 from rdflib import Graph, URIRef, Literal
-from rdflib.namespace import RDF, FOAF
+from rdflib.namespace import RDF, FOAF, DCTERMS
 from sqlalchemy import extract, desc
 
 from mine import db
-from mine.core import core
+from mine.core import core, AS
 from mine.core.forms import WebSignInForm
 from mine.core.models import User, Entry
 
@@ -64,6 +64,7 @@ def login_callback():
 def logout():
     logout_user()
     return redirect(url_for('core.index'))
+
 
 @core.route("/foaf")
 def foaf():
@@ -159,5 +160,29 @@ def micropub_endpoint():
 @core.route("/<int:year>/<int:month>/<id>-<slug>")
 def get_entry(year, month, id, slug=None):
     entry = Entry.query.filter(extract('year', Entry.created_at) == year).filter(extract('month', Entry.created_at) == month).filter_by(id=id).first_or_404()
-    print entry.content
+
+    g = Graph()
+    g.namespace_manager.bind("as", AS)
+    g.namespace_manager.bind("dcterms", DCTERMS)
+    if slug:
+        me = URIRef(url_for('core.get_entry', year=year, month=month, id=id, slug=slug, _external=True))
+    else:
+        me = URIRef(url_for('core.get_entry', year=year, month=month, id=id, _external=True))
+
+    if entry.name:
+        g.add((me, RDF.type, AS.Article))
+        g.add((me, AS.displayName, Literal(entry.name)))
+    else:
+        g.add((me, RDF.type, AS.Note))
+
+    g.add((me, AS.content, Literal(entry.content)))
+    g.add((me, AS.published, Literal(entry.created_at)))
+    g.add((me, DCTERMS.identifier, Literal(entry.id)))
+
+    accepts = request.headers['Accept']
+    if "text/turtle" in accepts:
+        r = make_response(g.serialize(format='turtle'))
+        r.content_type = "text/turtle"
+        return r
+
     return render_template("core/entry.html", entry=entry)
