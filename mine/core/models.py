@@ -27,15 +27,27 @@ class Entry(db.Model):
 
     @property
     def like_of(self):
-        return EntryMeta.query.filter_by(entry_id=self.id, predicate="like-of").first()
+        metadata = EntryMeta.query.filter_by(entry_id=self.id, predicate="like-of").first()
+        if metadata:
+            return metadata.object
+        else:
+            return None
 
     @property
     def in_reply_to(self):
-        return EntryMeta.query.filter_by(entry_id=self.id, predicate="in-reply-to").first()
+        metadata = EntryMeta.query.filter_by(entry_id=self.id, predicate="in-reply-to").first()
+        if metadata:
+            return metadata.object
+        else:
+            return None
 
     @property
     def repost_of(self):
-        return EntryMeta.query.filter_by(entry_id=self.id, predicate="repost-of").first()
+        metadata = EntryMeta.query.filter_by(entry_id=self.id, predicate="repost-of").first()
+        if metadata:
+            return metadata.object
+        else:
+            return None
 
 
 class EntryMeta(db.Model):
