@@ -11,6 +11,9 @@
           {{ entry.content|markdown|safe }}
         </div>
         <div class="entry-meta">
+          {% if entry.in_reply_to %}
+            <span><small>In Reply To: <a href="{{ entry.in_reply_to }}" rel="in-reply-to">{{ entry.in_reply_to }}</a></small></span>
+          {% endif %}
           <span class="pull-right"><small><a href="{{ entry.url }}">Created: {{ entry.created_at }}</a></small></span>
         </div>
     </article>

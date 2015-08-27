@@ -10,7 +10,7 @@ from sqlalchemy import extract, desc
 from mine import db
 from mine.core import core, AS
 from mine.core.forms import WebSignInForm
-from mine.core.models import User, Entry
+from mine.core.models import User, Entry, EntryMeta
 
 
 @core.route("/")
@@ -102,9 +102,6 @@ def webmention_endpoint():
 
 @core.route("/micropub", methods=['GET', 'POST'])
 def micropub_endpoint():
-    for k in request.form:
-        print k, request.form[k]
-
     auth = request.headers['Authorization']
     token = auth.replace("Bearer", "").strip()
     if not token:
@@ -137,6 +134,16 @@ def micropub_endpoint():
             entry.name = request.form['name']
 
         db.session.add(entry)
+        db.session.commit()
+
+        if "in-reply-to" in request.form:
+            reply = EntryMeta(
+                entry_id=entry.id,
+                predicate="in-reply-to",
+                object=request.form['in-reply-to']
+            )
+            db.session.add(reply)
+
         db.session.commit()
 
         response = make_response()
