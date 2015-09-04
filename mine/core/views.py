@@ -186,6 +186,9 @@ def get_entry(year, month, id, slug=None):
     g.add((me, AS.published, Literal(entry.created_at)))
     g.add((me, DCTERMS.identifier, Literal(entry.id)))
 
+    if entry.in_reply_to:
+        g.add((me, AS.inReplyTo, URIRef(entry.in_reply_to)))
+
     accepts = request.headers['Accept']
     if "text/turtle" in accepts:
         r = make_response(g.serialize(format='turtle'))
