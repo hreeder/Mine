@@ -72,3 +72,7 @@ body {
     right: -12px;;
     content: "\f0f6"
 }
+
+.entry-meta {
+    margin-left: 1em;
+}
