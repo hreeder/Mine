@@ -1,8 +1,11 @@
 import datetime
 
+import tweepy
+
+from flask import url_for
 from flask.ext.login import UserMixin
 
-from mine import db, lm
+from mine import app, db, lm
 
 
 class User(db.Model, UserMixin):
@@ -48,6 +51,18 @@ class Entry(db.Model):
             return metadata.object
         else:
             return None
+
+    def syndicate(self):
+        tweepy_auth = tweepy.OAuthHandler(app.config['TWITTER_CONS_KEY'], app.config['TWITTER_CONS_SECRET'])
+        tweepy_auth.set_access_token(app.config['TWITTER_ACCESS_TOK'], app.config['TWITTER_ACCESS_SECRET'])
+
+        twapi = tweepy.API(tweepy_auth)
+        tw_content = self.content
+        if len(self.content) > 100:
+            tw_content = " ".join(self.content.split(" ")[:17]) + "..."
+
+        tw_content += " - " + url_for('core.get_entry', year=self.created_at.year, month=self.created_at.month, id=self.id, _external=True)
+        twapi.update_status(tw_content)
 
 
 class EntryMeta(db.Model):

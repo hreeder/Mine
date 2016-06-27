@@ -157,6 +157,7 @@ def micropub_endpoint():
         entry.url = url
         db.session.add(entry)
         db.session.commit()
+        entry.syndicate()
         response.headers['Location'] = loc
         return response
 
